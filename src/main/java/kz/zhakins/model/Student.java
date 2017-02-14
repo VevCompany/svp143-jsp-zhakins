@@ -1,4 +1,4 @@
-package kz.zhakins.list;
+package kz.zhakins.model;
 
 public class Student {
 	private String name;
