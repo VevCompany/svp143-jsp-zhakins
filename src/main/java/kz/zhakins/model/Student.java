@@ -4,7 +4,7 @@ public class Student {
 	private String name;
 	private String group;
 	public Student(String name, String group) {
-		super();
+		
 		this.name = name;
 		this.group = group;
 	}
