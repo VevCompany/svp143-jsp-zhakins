@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>Succes</h1>
+<%@include file="/jsp/head.jsp" %>
+<h1>${title }</h1>
 
 
 <form action="StudentServlet" method="post">
 <label>Login</label>
-
+<input type="text" name="name" >
 
 <input type="submit" value="Submit">
 </form> 
-</body>
-</html>
+
+<c:forEach var="student" items="${students}">
+	<tr>
+		<td> <c:out value="${student.name }"></c:out></td>
+		<td> <c:out value="${student.group }"></c:out></td>
+	 </tr>
+</c:forEach>
+
+
+<%@include file="/jsp/footer.jsp" %>
