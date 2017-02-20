@@ -1,12 +1,19 @@
 package kz.zhakins.model;
 
 public class Student {
+	private Long id;
 	private String name;
-	private String group;
-	public Student(String name, String group) {
-		
+	private int age;
+	public Student(Long id2,String name, int age) {
+		this.id=id2;
 		this.name = name;
-		this.group = group;
+		this.age = age;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -14,12 +21,14 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getGroup() {
-		return group;
+	public int getAge() {
+		return age;
 	}
-	public void setGroup(String group) {
-		this.group = group;
+	public void setAge(int age) {
+		this.age = age;
 	}
 	
+	
+	 
 	
 }

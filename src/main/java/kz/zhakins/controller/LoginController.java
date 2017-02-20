@@ -1,4 +1,4 @@
-package kz.zhakins.servlet;
+package kz.zhakins.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,13 +16,13 @@ import kz.zhakins.model.User;
 /**
  * Servlet implementation class LoginServlet
  */
-public class LoginServlet extends HttpServlet {
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LoginController() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -1,4 +1,4 @@
-package kz.zhakins.servlet;
+package kz.zhakins.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,13 +20,13 @@ import kz.zhakins.model.Student;
 /**
  * Servlet implementation class StudentServlet
  */
-public class StudentServlet extends HttpServlet {
+public class StudentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentServlet() {
+    public StudentController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,6 +41,7 @@ public class StudentServlet extends HttpServlet {
 		
 		ArrayList<Student> find = StudentDAO.findStudent(name);
 		req.setAttribute("students", find);
+		
 		
 		RequestDispatcher rd = req.getRequestDispatcher("jsp/succes.jsp");
 		rd.forward(req, resp);		
