@@ -1,6 +1,7 @@
 package kz.zhakins.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,16 +14,16 @@ import kz.zhakins.model.Student;
 
 public class StudentDAO {
 	StudentList list;
-	
+	static Connection conn = null;
+	static Statement stmt = null;
+	static ResultSet result = null;
 	
 	
 	
 	
 	
 	public static ArrayList<Student>  findStudent(String Searchname){
-		Connection conn = null;
-    	Statement stmt = null;
-    	ResultSet result = null;
+		
 		
 		conn = DBConnection.getter().getDbConnection();
 		
@@ -37,6 +38,7 @@ public class StudentDAO {
 			
 			String sql = "SELECT id, name, age FROM student";
 			result = stmt.executeQuery(sql);
+			
 			
 		      while(result.next()){
 		         //Retrieve by column name
@@ -64,5 +66,27 @@ public class StudentDAO {
 			return list;
 		
 		
+	}
+	public static void addStudent(String name, int age){
+		
+		conn = DBConnection.getter().getDbConnection();
+		
+		try {
+			stmt = conn.createStatement();
+			PreparedStatement preparedStatement = null;
+			
+			preparedStatement = conn.prepareStatement(
+			         "INSERT INTO student( name, age) values( ?,?)");
+			preparedStatement.setString(1, name);
+			preparedStatement.setLong(2, age);
+			
+			preparedStatement.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

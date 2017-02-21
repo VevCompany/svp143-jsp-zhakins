@@ -6,6 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="shortcut icon" href="static/images/logo.png" type="image/png" > 
+<link type="text/css" rel="stylesheet" href="static/style/main.css" />
+<link type="text/css" rel="stylesheet" href="static/style/home.css" />
 <title>${title }</title>
 </head>
 <body>
+
+<div class="d1">

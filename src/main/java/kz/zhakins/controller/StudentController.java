@@ -39,11 +39,21 @@ public class StudentController extends HttpServlet {
 		boolean newStud = (req.getParameter("new") != null && !req.getParameter("new").isEmpty()) ? true : false;
 		System.out.println("Parameter name = "+ name);
 		
+		RequestDispatcher rd = req.getRequestDispatcher("jsp/succes.jsp");
+		
+		
+		if(newStud){
+			rd = req.getRequestDispatcher("jsp/addStudent.jsp");
+			int age = Integer.parseInt((req.getParameter("age") != null && !req.getParameter("age").isEmpty() ) ? req.getParameter("age"): "0") ;
+			if(!name.isEmpty() && age != 0)
+			StudentDAO.addStudent(name, age);
+			rd = req.getRequestDispatcher("jsp/succes.jsp");
+		}
+		
 		ArrayList<Student> find = StudentDAO.findStudent(name);
 		req.setAttribute("students", find);
 		
 		
-		RequestDispatcher rd = req.getRequestDispatcher("jsp/succes.jsp");
 		rd.forward(req, resp);		
 	
 	}
