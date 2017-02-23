@@ -1,15 +1,10 @@
 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="/jsp/head.jsp" %>
 
-
-<html>
-<head>
-<title>${title}</title>
-</head>
-
-<body>
 <h2>Hello World!123123SecondCommit</h2>
 
-<form action="LoginServlet" method="post">
+<form action="LoginController" method="post">
 <label>Login</label>
 <input type="text" name="username" >
 
@@ -17,8 +12,10 @@
 <input type="password" name="password">
 
 <input type="submit" value="Submit">
+
+
+
 </form> 
 
 
-</body>
-</html>
+<%@include file="/jsp/footer.jsp" %>
