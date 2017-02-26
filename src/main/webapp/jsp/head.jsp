@@ -11,5 +11,6 @@
 <title>${title }</title>
 </head>
 <body>
-
+<c:url var="home" value="StudentController"/>
+<a class="MyButton" href="${home}">Home</a>
 <div class="d1">

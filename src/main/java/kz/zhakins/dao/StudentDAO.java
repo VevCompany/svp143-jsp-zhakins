@@ -91,6 +91,28 @@ public class StudentDAO {
 		
 		
 	}
+	public static void delStudent(int id) throws SQLException{
+		conn = DBConnection.getter().getDbConnection();
+		
+		
+		stmt = conn.createStatement();
+		PreparedStatement preparedStatement = null;
+		
+		preparedStatement = conn.prepareStatement(
+		         "DELETE from student  where id=?");	
+		
+		preparedStatement.setLong(1, id);
+		
+		preparedStatement.executeUpdate();
+				
+
+
+		
+		
+		
+		
+	}
+	
 	public static void addStudent(String name, int age){
 		
 		conn = DBConnection.getter().getDbConnection();

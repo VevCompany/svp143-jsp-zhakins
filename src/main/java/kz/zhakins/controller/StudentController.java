@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.ResponseCache;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kz.zhakins.dao.StudentDAO;
 import kz.zhakins.dao.StudentList;
@@ -35,6 +37,7 @@ public class StudentController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		System.out.println("Method type " + req.getMethod());
 		String name = (req.getParameter("name") != null && !req.getParameter("name").isEmpty() ) ? req.getParameter("name"): "";
 		
@@ -42,10 +45,10 @@ public class StudentController extends HttpServlet {
 		boolean newStud = req.getParameter("new")!=null?(req.getParameter("new").equals("1")?true:false):false;
 		boolean editStud = (req.getParameter("edit") != null && !req.getParameter("edit").isEmpty()) ? true : false;
 		//boolean createStud = (req.getParameter("create") != null && !req.getParameter("create").isEmpty()) ? true : false;
-		boolean createStud = false;
+		boolean delStud = (req.getParameter("del") != null && !req.getParameter("del").isEmpty()) ? true : false;;
 		System.out.println("Parameter name = "+ name);
 		System.out.println("Parameter newStud = "+ newStud);
-		System.out.println("Parameter createStud = "+ createStud);
+		
 		RequestDispatcher rd = req.getRequestDispatcher("jsp/succes.jsp");
 		
 		
@@ -59,19 +62,10 @@ public class StudentController extends HttpServlet {
 				
 		}
 		else if(editStud){
-			//String StudentID = (req.getParameter("id") != null && !req.getParameter("id").isEmpty() ) ? req.getParameter("id"): "0";
-			int id =35;// Integer.parseInt(req.getParameter("35"));
-			//int id = req.getParameter("student.id");
-			
-			try {
-				StudentDAO.editStudent(35,"Samat",30);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			rd = req.getRequestDispatcher("jsp/editStudent.jsp");
-			//req.setAttribute("students", student);
-			rd.forward(req, resp);
+			editStudent(req,resp);
+		}
+		else if(delStud){
+			delStudent(req,resp);
 		}
 		
 			ArrayList<Student> find = StudentDAO.findStudent(name);
@@ -101,9 +95,41 @@ public class StudentController extends HttpServlet {
 		
 		rd.forward(req, resp);
 	}
+	protected void delStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+		RequestDispatcher rd = req.getRequestDispatcher("jsp/succes.jsp");
+		Integer id = Integer.parseInt(req.getParameter("id"));
+		try {
+			StudentDAO.delStudent(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		rd.forward(req, resp);
+	}
 	
 	protected void editStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		RequestDispatcher rd = req.getRequestDispatcher("jsp/succes.jsp");		
+		Integer id = Integer.parseInt(req.getParameter("id"));
+		String name = (req.getParameter("name") != null && !req.getParameter("name").isEmpty() ) ? req.getParameter("name"): "";
+		Integer age = Integer.parseInt(req.getParameter("age"));
+		
+			
+		HttpSession session  = req.getSession();
+		session.setAttribute("id", id);
+		session.setAttribute("name", name);
+		session.setAttribute("age", age);
 		
 		
+		
+		try {
+			StudentDAO.editStudent(id,name,age);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		rd = req.getRequestDispatcher("jsp/editStudent.jsp");
+		//req.setAttribute("students", student);
+		//req.setAttribute("students", student);
+		rd.forward(req, resp);
 	}
 }
