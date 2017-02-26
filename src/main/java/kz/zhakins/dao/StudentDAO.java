@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import kz.zhakins.model.Student;
 
@@ -60,9 +61,11 @@ public class StudentDAO {
 						result1.add(list.get(i));
 					
 				}
+				
+				//Collections.sort(result1, Student.Comparators.id);
 				return result1;
 			}
-		
+			list.sort((s1,s2)-> (int)( s1.getId() - s2.getId()) );
 			return list;
 		
 		
