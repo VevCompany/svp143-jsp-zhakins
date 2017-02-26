@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/jsp/head.jsp" %>
-<h1>${title }</h1>
+
+<c:url var="newStud" value="StudentController?new=1"/>
+<c:url var="editStud" value="StudentController?edit=1"/>
+
+<a class="MyButton" href="${newStud}">Add</a>
+
+
 
 
 <form action="StudentController" method="post">
-<a class="MyButton" href="StudentController?new=1">Add</a>
+
 <label>Login</label>
 <input type="text" name="name" >
 
@@ -12,7 +18,7 @@
 </form> 
 
 
-    
+
     
 
 
@@ -29,7 +35,7 @@
 		<td> <c:out value="${student.id }"></c:out></td>
 		<td> <c:out value="${student.name }"></c:out></td>
 		<td> <c:out value="${student.age }"></c:out></td>
-		<td> <a href="#">Edit</a><a href="#">Delete</a> </td>
+		<td > <a  href="${editStud}" >Edit</a><a href="#">Delete</a> </td>
 	 </tr>
 </c:forEach>
 </table>

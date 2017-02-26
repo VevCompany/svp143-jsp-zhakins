@@ -67,6 +67,30 @@ public class StudentDAO {
 		
 		
 	}
+	
+	public static void editStudent(int id ,String name,int age) throws SQLException{
+		conn = DBConnection.getter().getDbConnection();
+		
+		
+		stmt = conn.createStatement();
+		PreparedStatement preparedStatement = null;
+		
+		preparedStatement = conn.prepareStatement(
+		         "UPDATE student SET name=?, age=? where id=?");
+		
+		preparedStatement.setString(1, name);
+		preparedStatement.setLong(2, age);
+		preparedStatement.setLong(3, id);
+		
+		preparedStatement.executeUpdate();
+				
+
+
+		
+		
+		
+		
+	}
 	public static void addStudent(String name, int age){
 		
 		conn = DBConnection.getter().getDbConnection();
