@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import kz.zhakins.model.Student;
 
@@ -60,13 +61,61 @@ public class StudentDAO {
 						result1.add(list.get(i));
 					
 				}
+				
+				//Collections.sort(result1, Student.Comparators.id);
 				return result1;
 			}
-		
+			list.sort((s1,s2)-> (int)( s1.getId() - s2.getId()) );
 			return list;
 		
 		
 	}
+	
+	public static void editStudent(int id ,String name,int age) throws SQLException{
+		conn = DBConnection.getter().getDbConnection();
+		
+		
+		stmt = conn.createStatement();
+		PreparedStatement preparedStatement = null;
+		
+		preparedStatement = conn.prepareStatement(
+		         "UPDATE student SET name=?, age=? where id=?");
+		
+		preparedStatement.setString(1, name);
+		preparedStatement.setLong(2, age);
+		preparedStatement.setLong(3, id);
+		
+		preparedStatement.executeUpdate();
+				
+
+
+		
+		
+		
+		
+	}
+	public static void delStudent(int id) throws SQLException{
+		conn = DBConnection.getter().getDbConnection();
+		
+		
+		stmt = conn.createStatement();
+		PreparedStatement preparedStatement = null;
+		
+		preparedStatement = conn.prepareStatement(
+		         "DELETE from student  where id=?");	
+		
+		preparedStatement.setLong(1, id);
+		
+		preparedStatement.executeUpdate();
+				
+
+
+		
+		
+		
+		
+	}
+	
 	public static void addStudent(String name, int age){
 		
 		conn = DBConnection.getter().getDbConnection();
