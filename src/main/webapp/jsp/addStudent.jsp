@@ -3,7 +3,7 @@
 
 
 
-<form action="StudentController?create=0" method="post">
+<form action="StudentController" method="post">
 	
 	<input type="text" name="name" >
 	<input type="text" name="age" >
